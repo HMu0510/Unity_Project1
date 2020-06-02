@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     [SerializeField] private float speed = 5.0f;
+    [SerializeField] private float rotSpeed = 45.0f;
     private bool triger;
     private Collider col;
     private Rigidbody rigid;
@@ -19,6 +20,7 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         Move();
+        //transform.Rotate(0, rotSpeed * Time.deltaTime, 0);
     }
     private void Move()
     {
@@ -53,11 +55,11 @@ public class PlayerMove : MonoBehaviour
                 v = 0;
             }
         }
-        Camera.main.
-        transform.Translate(h * speed * Time.deltaTime, v * speed * Time.deltaTime,0);
-        //Vector3 dir = new Vector3(h, v, 0);
+        //Camera.main.
+        //transform.Translate(h * speed * Time.deltaTime, v * speed * Time.deltaTime,0);
+        Vector3 dir = new Vector3(h, v, 0);
         //dir.Normalize();
-        //transform.Translate(dir * speed * Time.deltaTime);
+        transform.Translate(dir * speed * Time.deltaTime);
 
         //Vector3 position = transform.position;
         //position.x = Mathf.Clamp(position.x, -2.3f, 2.3f);
