@@ -20,5 +20,14 @@ public class PlayerSubWeapon : MonoBehaviour
             sub[weaIndex].SetActive(true);
             weaIndex++;
         }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            sub[weaIndex].SetActive(true);
+            weaIndex++;
+        }
+        if(weaIndex >sub.Length)
+        {
+            weaIndex = sub.Length;
+        }
     }
 }
