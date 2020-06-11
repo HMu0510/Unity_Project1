@@ -6,21 +6,24 @@ public class SubWeapon : MonoBehaviour
 {
     [SerializeField] private GameObject bulletFactory;      //bullet prefab
     [SerializeField] private GameObject firePosition;
-    private bool shoot;
+    //private bool shoot;
+    private float count = 0;
     // Start is called before the first frame update
     void Start()
     {
-        shoot = true;
-        InvokeRepeating("Fire", 0, 0.5f);
+        //shoot = true;
+        //InvokeRepeating("Fire", 0, 0.5f);
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        //Fire();
         transform.Rotate(0, 45 * Time.deltaTime, 0);
-
+        if(++count % 60 == 0)
+        {
+            Fire();
+        }
+        
     }
 
 

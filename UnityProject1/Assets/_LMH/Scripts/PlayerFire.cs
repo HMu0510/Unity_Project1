@@ -8,14 +8,18 @@ public class PlayerFire : MonoBehaviour
     [SerializeField] private GameObject bulletFactory;      //bullet prefab
     [SerializeField] private GameObject firePosition;
     LineRenderer lr;
-    
+    public float dis;
     private Vector3 lrPos0;
     private Vector3 lrPos1;
     private Vector3 dest;
+    private int count;
     private bool lrSet;
     private bool bosshit;
     RaycastHit colli;
+
+    public AudioSource audio;
     // Start is called before the first frame update
+    public VariableJoystick joystick;
     void Start()
     {
         lr = GetComponent<LineRenderer>();
@@ -23,7 +27,7 @@ public class PlayerFire : MonoBehaviour
         lrSet = false;
         bosshit = false;
 
-
+        audio = GetComponent<AudioSource>();
 
         //gameObj use SetActive, component use enabled
     }
@@ -31,15 +35,23 @@ public class PlayerFire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Fire();
+        //Fire();
         FireRay();
+        //ButtonFire();
+        if(joystick.Horizontal !=0 || joystick.Vertical !=0)
+        {
+            if(++count % 20 ==0)
+            {
+                Fire();
+            }
+        }
         
     }
 
-    private void Fire()
+    public void Fire()
     {
         //default mouse 0  left ctrl
-        if(Input.GetButtonDown("Fire1"))
+        //if(Input.GetButtonDown("Fire2"))
         {
             //bulletFactory make infinity bullet
             //Instantiate() function prefab file to gameobject
@@ -53,6 +65,7 @@ public class PlayerFire : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire2") && !lr.enabled)
         {
+            audio.Play();
             lr.enabled = true;
             lrPos0 = firePosition.transform.position;
             lrPos1 = firePosition.transform.position;
@@ -129,5 +142,12 @@ public class PlayerFire : MonoBehaviour
                 }
             }
         }
+    }
+    public void ButtonFire()
+    {
+        GameObject bullet = Instantiate(bulletFactory);
+        //bullet object position(start position -> player position)
+        bullet.transform.position = firePosition.transform.position;
+        audio.Play();
     }
 }

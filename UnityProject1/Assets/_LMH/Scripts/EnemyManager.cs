@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    [SerializeField] GameObject enemyFactory;
+    [SerializeField] GameObject enemyFactory1;
+    [SerializeField] GameObject enemyFactory2;
     [SerializeField] GameObject[] spawnPoint;
     public float spawnTime = 1.0f;
     public float currentTime = 0.0f;
@@ -19,14 +20,26 @@ public class EnemyManager : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        
+        GameObject enemy;   
         currentTime += Time.deltaTime;
         if(currentTime > spawnTime)
         {
-            GameObject enemy = Instantiate(enemyFactory);
-            enemy.transform.position = spawnPoint[Random.Range(0, spawnPoint.Length)].transform.position;
-            //enemy.transform.position = spawnPoint[Random.Range(0, 4)].transform.position;
-            enemy.transform.position = transform.GetChild(Random.Range(0, spawnPoint.Length)).transform.position;
+            int ran = Random.Range(0, 2);
+            if(ran ==1)
+            {
+                enemy = Instantiate(enemyFactory1);
+                enemy.transform.position = spawnPoint[Random.Range(0, spawnPoint.Length)].transform.position;
+                //enemy.transform.position = spawnPoint[Random.Range(0, 4)].transform.position;
+                enemy.transform.position = transform.GetChild(Random.Range(0, spawnPoint.Length)).transform.position;
+
+            }
+            else
+            {
+                enemy = Instantiate(enemyFactory2);
+                enemy.transform.position = spawnPoint[Random.Range(0, spawnPoint.Length)].transform.position;
+                //enemy.transform.position = spawnPoint[Random.Range(0, 4)].transform.position;
+                enemy.transform.position = transform.GetChild(Random.Range(0, spawnPoint.Length)).transform.position;
+            }
 
             currentTime = 0.0f;
             spawnTime = Random.Range(0.5f, 2.0f);

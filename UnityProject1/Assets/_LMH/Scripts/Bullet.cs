@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     //총알이 생성된 후 위로(발사 방향)만 움직인다
 
     [SerializeField] float speed = 10.0f;
+    public int damage = 1;
     // Start is called before the first frame update
     void Start()
     {

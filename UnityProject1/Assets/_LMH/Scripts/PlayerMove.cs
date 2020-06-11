@@ -9,6 +9,8 @@ public class PlayerMove : MonoBehaviour
     private bool triger;
     private Collider col;
     private Rigidbody rigid;
+
+    public VariableJoystick joystick;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,14 @@ public class PlayerMove : MonoBehaviour
     {
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
+
+
+        //use joystick
+        if(h == 0 && v == 0)
+        {
+            h = joystick.Horizontal;
+            v = joystick.Vertical;
+        }
 
         if (transform.position.x >= 2.3f)
         {
